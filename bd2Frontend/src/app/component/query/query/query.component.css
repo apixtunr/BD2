@@ -1,0 +1,275 @@
+/* Estilos generales */
+.query-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Textarea mejorado */
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #f9fafb;
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Sección de logs - Versión mejorada */
+.logs-section {
+  margin-top: 30px;
+  background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.logs-section h3 {
+  background-color: #3b82f6;
+  color: white;
+  margin: 0;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.logs-container {
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.log-entry {
+  padding: 12px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 15px;
+  align-items: center;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+.log-entry:hover {
+  background-color: #f8fafc;
+}
+
+.log-entry:last-child {
+  border-bottom: none;
+}
+
+.log-time {
+  color: #64748b;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.log-message {
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.log-rows {
+  background-color: #e0f2fe;
+  color: #0369a1;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* Estilos por tipo de log */
+.log-entry.info {
+  border-left: 4px solid #60a5fa;
+}
+
+.log-entry.success {
+  border-left: 4px solid #34d399;
+}
+
+.log-entry.error {
+  border-left: 4px solid #f87171;
+}
+
+/* Tabla de resultados */
+.table-container {
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Mensajes de operación */
+.message-box {
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-box.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-left: 4px solid #34d399;
+}
+
+.message-box.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-left: 4px solid #f87171;
+}
+
+/* Botones */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.execute-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.execute-btn:hover {
+  background-color: #2563eb;
+}
+
+.clear-btn {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.clear-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.logout-button {
+  background-color: #ef4444;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+}
+
+/* Header */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header-container h2 {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Agregar estos estilos */
+
+.user-info {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.user-info i {
+    color: #3b82f6;
+    font-size: 16px;
+}
+
+.user-info strong {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.server-info {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-left: 8px;
+}
+
+/* Ajustar header-container para alineación vertical */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+

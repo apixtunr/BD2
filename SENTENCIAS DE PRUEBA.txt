@@ -1,0 +1,108 @@
+-------> SENTENCIAS DQL <-------
+
+SELECT * FROM USUARIO;
+
+-------> SENTENCIAS DML <-------
+
+INSERT INTO usuario(nombre, correo) VALUES 
+('Juan Pérez', 'juan.perez@example.com');
+
+UPDATE usuario
+SET correo = 'juan.nuevo@example.com'
+WHERE nombre = 'Juan Pérez';
+
+
+DELETE FROM usuario
+WHERE id = 1;
+
+
+-------> SENTENCIAS DDL <-------
+
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    precio DECIMAL(10,2)
+);
+
+
+ALTER TABLE productos
+ADD descripcion TEXT; // agrega un campo o columna
+
+
+ALTER TABLE productos
+DROP COLUMN descripcion; // elimina un campo o columna
+
+
+DROP TABLE productos; // elimina una tabla
+
+
+TRUNCATE TABLE productos; // vacía una tabla
+
+-------> SENTENCIAS DCL <-------
+
+GRANT SELECT, INSERT, UPDATE ON databaseproject.* TO 'usuario1'@'localhost' IDENTIFIED BY 'contrasena123'; // le da al usuario usuario1 permisos para leer, insertar y actualizar cualquier tabla en la base de datos databaseproject
+
+REVOKE INSERT, UPDATE ON databaseproject.* FROM 'usuario1'@'localhost'; // Esto quita los permisos de INSERT y UPDATE al usuario usuario1.
+
+SHOW GRANTS FOR 'usuario1'@'localhost'; // visualiza los permisos de usuario1
+
+FLUSH PRIVILEGES;
+
+-------> SENTENCIAS TCL <-------
+
+START TRANSACTION; -- o también se puede usar: BEGIN;
+
+COMMIT;
+
+ROLLBACK;
+
+TuPasswordSeguro123!
+
+
+EJEMPLO DE TRANSACCION QUE INSERTA 2 PRODUCTOS
+
+START TRANSACTION;
+
+-- Primer producto
+INSERT INTO productos(nombre, precio)
+VALUES ('Arroz', 5.50);
+
+-- Segundo producto
+INSERT INTO productos(nombre, precio)
+VALUES ('Frijoles', 4.75);
+
+-- Si todo va bien, confirmamos los cambios
+COMMIT;
+
+START TRANSACTION;
+INSERT INTO productos(nombre, precio)
+VALUES ('Arroz', 5);
+INSERT INTO productos(nombre, precio)
+VALUES ('Frijoles', 4);
+COMMIT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE USER IF NOT EXISTS 'newuser'@'localhost' IDENTIFIED BY 'TuPasswordSeguro123!';
+
+-- 2. Permisos para conectarse y ver bases de datos
+GRANT SHOW DATABASES, PROCESS ON *.* TO 'newuser'@'localhost';
+
+-- 3. Permisos para consultas SELECT en una DB específica
+GRANT SELECT ON basededatos.* TO 'newuser'@'localhost';
+
+FLUSH PRIVILEGES;

@@ -1,0 +1,60 @@
+<div class="query-container">
+    <div class="header-container">
+        <div>
+            <h2>Ejecutar Consulta SQL</h2>
+            <div class="user-info" *ngIf="currentUser">
+                <i class="fas fa-user-circle"></i>
+                Conectado como: <strong>{{currentUser.username}}</strong>
+                <span class="server-info">({{currentUser.host}}:{{currentUser.port}})</span>
+            </div>
+        </div>
+        
+        <button (click)="logout()" class="logout-button">
+            Cerrar Sesión
+        </button>
+    </div>
+    
+    <textarea [(ngModel)]="queryText" placeholder="Escribe aquí tu sentencia SQL..." rows="15"></textarea>
+  
+    <div class="button-group">
+        <button (click)="ejecutarConsulta()" class="execute-btn">Ejecutar</button>
+        <button (click)="limpiarTodo()" class="clear-btn">Limpiar</button>
+    </div>
+  
+    <!-- Sección de Resultados -->
+    <div *ngIf="resultado" class="result-section">
+        <h3>Resultado</h3>
+        <div *ngIf="resultado.tipo === 'tabla'" class="table-container">
+            <!-- Tabla para resultados SELECT -->
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let col of resultado.columnas">{{col}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fila of resultado.datos">
+                        <td *ngFor="let col of resultado.columnas">{{fila[col]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="resultado.tipo === 'mensaje'" class="message-box">
+            {{resultado.mensaje}}
+        </div>
+    </div>
+
+    <!-- Sección de Logs -->
+    <div class="logs-section">
+        <h3>Registro de Actividad</h3>
+        <div class="logs-container">
+            <div *ngFor="let log of logs" class="log-entry" [ngClass]="log.tipo">
+                <span class="log-time">{{log.timestamp | date:'mediumTime'}}</span>
+                <span class="log-message">{{log.mensaje}}</span>
+                <span *ngIf="log.filasAfectadas !== undefined" class="log-rows">
+                    Filas afectadas: {{log.filasAfectadas}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

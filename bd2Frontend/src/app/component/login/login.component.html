@@ -1,0 +1,36 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>Gestor de Base de Datos</h2>
+      <div class="logo">MySQL</div>
+    </div>
+
+    <form (ngSubmit)="login()" class="login-form">
+      <div class="input-group">
+        <label for="host">Servidor</label>
+        <input type="text" id="host" [(ngModel)]="loginData.host" name="host" required>
+      </div>
+
+      <div class="input-group">
+        <label for="port">Puerto</label>
+        <input type="text" id="port" [(ngModel)]="loginData.port" name="port" required>
+      </div>
+
+      <div class="input-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" [(ngModel)]="loginData.username" name="username" required>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" [(ngModel)]="loginData.password" name="password" required>
+      </div>
+
+      <button type="submit" class="login-button">Conectar</button>
+    </form>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{errorMessage}}
+    </div>
+  </div>
+</div>
