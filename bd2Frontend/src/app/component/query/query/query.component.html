@@ -14,12 +14,12 @@
         </button>
     </div>
     
-    <textarea [(ngModel)]="queryText" placeholder="Escribe aquí tu sentencia SQL..." rows="15"></textarea>
-  
-    <div class="button-group">
-        <button (click)="ejecutarConsulta()" class="execute-btn">Ejecutar</button>
-        <button (click)="limpiarTodo()" class="clear-btn">Limpiar</button>
-    </div>
+    <textarea #queryInput [(ngModel)]="queryText" placeholder="Escribe aquí tu sentencia SQL..." rows="15"></textarea>
+
+<div class="button-group">
+    <button (click)="ejecutarConsulta(queryInput)" class="execute-btn">Ejecutar</button>
+    <button (click)="limpiarTodo()" class="clear-btn">Limpiar</button>
+</div>
   
     <!-- Sección de Resultados -->
     <div *ngIf="resultado" class="result-section">
