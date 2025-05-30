@@ -1,11 +1,54 @@
--------> SENTENCIAS DQL <-------
+-------> CREACIÓN DE USUARIO <-------
 
-SELECT * FROM USUARIO;
+CREATE USER 'usuariobd'@'%' IDENTIFIED BY 'bd123$';
 
--------> SENTENCIAS DML <-------
+GRANT ALL PRIVILEGES ON databaseproject.* TO 'usuariobd'@'%';
+FLUSH PRIVILEGES;
 
-INSERT INTO usuario(nombre, correo) VALUES 
-('Juan Pérez', 'juan.perez@example.com');
+GRANT SELECT, INSERT, UPDATE, DELETE ON databaseproject.* TO 'usuariobd'@'%';
+
+FLUSH PRIVILEGES;
+
+-------> SENTENCIAS DDL <----------------------------------------------------------------------------------------
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    pass VARCHAR(100),
+    correo VARCHAR(30)
+);
+
+
+ALTER TABLE usuario
+ADD apellido TEXT; // agrega un campo o columna
+
+
+ALTER TABLE usuario
+DROP COLUMN apellido; // elimina un campo o columna
+
+
+DROP TABLE usuario; // elimina una tabla
+
+
+TRUNCATE TABLE usuario; // vacía una tabla
+
+DROP USER 'usuariobd'@'localhost';
+
+CREATE DATABASE bd2project;
+
+-------> SENTENCIAS DQL <----------------------------------------------------------------------------------------
+
+SELECT * FROM usuario;
+
+-------> SENTENCIAS DML <----------------------------------------------------------------------------------------
+
+INSERT INTO usuario(nombre, pass, correo) VALUES 
+('Juan Pérez', 123, 'juan.perez@example.com'),
+('María Gómez', 456, 'maria.gomez@example.com'),
+('Carlos Ruiz', 789, 'carlos.ruiz@example.com'),
+('Lucía Fernández', 321, 'lucia.fernandez@example.com'),
+('Andrés Torres', 654, 'andres.torres@example.com');
+
 
 UPDATE usuario
 SET correo = 'juan.nuevo@example.com'
@@ -16,47 +59,23 @@ DELETE FROM usuario
 WHERE id = 1;
 
 
--------> SENTENCIAS DDL <-------
+-------> SENTENCIAS DCL <----------------------------------------------------------------------------------------
 
-CREATE TABLE productos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    precio DECIMAL(10,2)
-);
+GRANT SELECT, INSERT, UPDATE ON databaseproject.* TO 'usuariobd'@'%' IDENTIFIED BY 'bd123$'; // le da al usuario usuariobd permisos para leer, insertar y actualizar cualquier tabla en la base de datos databaseproject
 
+REVOKE INSERT, UPDATE ON databaseproject.* FROM 'usuariobd'@'%'; // Esto quita los permisos de INSERT y UPDATE al usuario usuariobd.
 
-ALTER TABLE productos
-ADD descripcion TEXT; // agrega un campo o columna
-
-
-ALTER TABLE productos
-DROP COLUMN descripcion; // elimina un campo o columna
-
-
-DROP TABLE productos; // elimina una tabla
-
-
-TRUNCATE TABLE productos; // vacía una tabla
-
--------> SENTENCIAS DCL <-------
-
-GRANT SELECT, INSERT, UPDATE ON databaseproject.* TO 'usuario1'@'localhost' IDENTIFIED BY 'contrasena123'; // le da al usuario usuario1 permisos para leer, insertar y actualizar cualquier tabla en la base de datos databaseproject
-
-REVOKE INSERT, UPDATE ON databaseproject.* FROM 'usuario1'@'localhost'; // Esto quita los permisos de INSERT y UPDATE al usuario usuario1.
-
-SHOW GRANTS FOR 'usuario1'@'localhost'; // visualiza los permisos de usuario1
+SHOW GRANTS FOR 'usuariobd'@'%'; // visualiza los permisos de usuariobd
 
 FLUSH PRIVILEGES;
 
--------> SENTENCIAS TCL <-------
+-------> SENTENCIAS TCL <----------------------------------------------------------------------------------------
 
 START TRANSACTION; -- o también se puede usar: BEGIN;
 
 COMMIT;
 
 ROLLBACK;
-
-TuPasswordSeguro123!
 
 
 EJEMPLO DE TRANSACCION QUE INSERTA 2 PRODUCTOS
@@ -74,35 +93,47 @@ VALUES ('Frijoles', 4.75);
 -- Si todo va bien, confirmamos los cambios
 COMMIT;
 
+
+
 START TRANSACTION;
-INSERT INTO productos(nombre, precio)
-VALUES ('Arroz', 5);
-INSERT INTO productos(nombre, precio)
-VALUES ('Frijoles', 4);
+INSERT INTO usuario(nombre, pass, correo) VALUES 
+('Pedro López', 'clave123', 'pedro.lopez@example.com');
+INSERT INTO usuario(nombre, pass, correo) VALUES 
+('Ana Ramos', 'segura456', 'pedro.lopez@example.com'); 
+COMMIT;
+ROLLBACK;
+
+
+
+START TRANSACTION;
+INSERT INTO usuario(nombre, pass, correo) VALUES 
+('Pedro López', 'clave123', 'pedro.lopez@example.com');
+INSERT INTO usuario(nombre, pass, correo) VALUES 
+('Ana Ramos', 'segura456', 'pedro.lopez@example.com');
+
+COMMIT;
+ROLLBACK;
+
+
+START TRANSACTION;
+INSERT INTO usuario (nombre, pass, correo) VALUES ('juan', '1234', 'juan@mail.com');
+INSERT INTO usuario (nombre, pass, correo) VALUES ('ana', '5678', 'ana@mail.com');
 COMMIT;
 
 
+START TRANSACTION;
+INSERT INTO usuario (nombre, pass, correo) VALUES ('martin', 'abcd', 'martin@mail.com');
+INSERT INTO usuario (nombre, pass, correo) VALUES ('paula', 'efgh', 'paula@mail.com');
+ROLLBACK;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-CREATE USER IF NOT EXISTS 'newuser'@'localhost' IDENTIFIED BY 'TuPasswordSeguro123!';
+CREATE USER IF NOT EXISTS 'usuariobd'@'localhost' IDENTIFIED BY 'TuPasswordSeguro123!';
 
 -- 2. Permisos para conectarse y ver bases de datos
-GRANT SHOW DATABASES, PROCESS ON *.* TO 'newuser'@'localhost';
+GRANT SHOW DATABASES, PROCESS ON *.* TO 'usuariobd'@'localhost';
 
 -- 3. Permisos para consultas SELECT en una DB específica
-GRANT SELECT ON basededatos.* TO 'newuser'@'localhost';
+GRANT SELECT ON basededatos.* TO 'usuariobd'@'localhost';
 
 FLUSH PRIVILEGES;

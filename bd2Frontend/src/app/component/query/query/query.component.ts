@@ -41,7 +41,7 @@ ejecutarConsulta(queryInput?: HTMLTextAreaElement) {
   const texto = textoAEjecutar.trim().toUpperCase().replace(/\s+/g, ' ');
   const esTransaccion =
   texto.startsWith('START TRANSACTION') &&
-  texto.includes('COMMIT');
+  (texto.includes('COMMIT') || texto.includes('ROLLBACK'));
 
   if (esTransaccion) {
     const queries = textoAEjecutar
@@ -88,7 +88,7 @@ ejecutarConsulta(queryInput?: HTMLTextAreaElement) {
   const ejecutarSecuencial = (index: number) => {
     if (index >= consultas.length) return;
 
-    const consulta = consultas[index].toUpperCase();
+    const consulta = consultas[index];
     this.agregarLog('info', `Ejecutando: ${consulta.substring(0, 50)}${consulta.length > 50 ? '...' : ''}`);
 
     this.queryService.ejecutar(consulta).subscribe({
